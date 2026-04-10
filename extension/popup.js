@@ -132,3 +132,11 @@ function showTab(tab) {
                                                                                                                                                                                                                                                                                                                                                                                               navigator.clipboard.writeText(text);
                                                                                                                                                                                                                                                                                                                                                                                                 alert('Copied!');
                                                                                                                                                                                                                                                                                                                                                                                                 }
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      const tabName = this.getAttribute('data-tab');
+      if (tabName) showTab(tabName);
+    });
+  });
+});
