@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 380px; font-family: Arial, sans-serif; background: #f5f5f5; }
+.header { background: #1a1a2e; color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+.header h1 { font-size: 16px; }
+.plan-badge { background: #00b894; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; }
+.tabs { display: flex; background: #16213e; }
+.tab { flex: 1; padding: 8px 4px; color: #aaa; font-size: 11px; text-align: center; cursor: pointer; border-bottom: 2px solid transparent; }
+.tab.active { color: #00b894; border-bottom-color: #00b894; }
+.content { padding: 16px; background: white; min-height: 300px; }
+.section-title { font-size: 12px; color: #666; margin-bottom: 12px; font-weight: bold; }
+input, textarea { width: 100%; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; margin-bottom: 10px; }
+.btn { width: 100%; padding: 10px; background: #00b894; color: white; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; }
+.btn:hover { background: #00a381; }
+.btn-secondary { background: #0984e3; margin-top: 8px; }
+.result { margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 6px; font-size: 12px; display: none; }
+.result.show { display: block; }
+.success { border-left: 3px solid #00b894; }
+.error { border-left: 3px solid #e74c3c; }
+.due-date-item { padding: 8px; border-bottom: 1px solid #eee; font-size: 12px; }
+.due-date-item span { color: #e74c3c; font-weight: bold; }
+select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+      <h1>GST Copilot</h1>
+          <div style="font-size:10px;color:#aaa;">CHARTERED ACCOUNTANT TOOL</div>
+            </div>
+              <div>
+                  <div class="plan-badge" id="planBadge">FREE PLAN</div>
+                      <div style="font-size:10px;color:#aaa;text-align:right;margin-top:2px;" id="checksLeft">5 free checks remaining</div>
+                        </div>
+                        </div>
+                        <div class="tabs">
+                          <div class="tab active" onclick="showTab('gstin')">GSTIN</div>
+                            <div class="tab" onclick="showTab('hsn')">HSN/SAC</div>
+                              <div class="tab" onclick="showTab('reminder')">REMINDER</div>
+                                <div class="tab" onclick="showTab('dates')">DUE DATES</div>
+                                  <div class="tab" onclick="showTab('export')">EXPORT</div>
+                                  </div>
+
+                                  <!-- GSTIN TAB -->
+                                  <div class="content" id="tab-gstin">
+                                    <div class="section-title">GSTIN VALIDATOR</div>
+                                      <input type="text" id="gstinInput" placeholder="Enter 15-digit GSTIN (e.g. 27AAPFU0939F1Z5)" maxlength="15">
+                                        <button class="btn" onclick="validateGSTIN()">Validate GSTIN</button>
+                                          <div class="result" id="gstinResult"></div>
+                                          </div>
+
+                                          <!-- HSN TAB -->
+                                          <div class="content" id="tab-hsn" style="display:none">
+                                            <div class="section-title">HSN/SAC LOOKUP</div>
+                                              <input type="text" id="hsnInput" placeholder="Enter HSN/SAC code (e.g. 8471)">
+                                                <button class="btn" onclick="lookupHSN()">Lookup HSN</button>
+                                                  <div class="result" id="hsnResult"></div>
+                                                  </div>
+
+                                                  <!-- REMINDER TAB -->
+                                                  <div class="content" id="tab-reminder" style="display:none">
+                                                    <div class="section-title">PAYMENT REMINDER</div>
+                                                      <input type="text" id="clientName" placeholder="Client Name">
+                                                        <input type="text" id="clientGSTIN" placeholder="Client GSTIN">
+                                                          <input type="text" id="amount" placeholder="Amount (₹)">
+                                                            <input type="text" id="dueDate" placeholder="Due Date (e.g. 20 Apr 2026)">
+                                                              <button class="btn" onclick="generateReminder()">Generate Reminder</button>
+                                                                <div class="result" id="reminderResult"></div>
+                                                                </div>
+
+                                                                <!-- DUE DATES TAB -->
+                                                                <div class="content" id="tab-dates" style="display:none">
+                                                                  <div class="section-title">GST DUE DATES</div>
+                                                                    <button class="btn" onclick="loadDueDates()">Load Due Dates</button>
+                                                                      <div id="dueDatesResult" style="margin-top:12px;"></div>
+                                                                      </div>
+
+                                                                      <!-- EXPORT TAB -->
+                                                                      <div class="content" id="tab-export" style="display:none">
+                                                                        <div class="section-title">EXPORT DATA</div>
+                                                                          <input type="text" id="exportTitle" placeholder="Report Title">
+                                                                            <textarea id="exportContent" placeholder="Report content..." rows="4"></textarea>
+                                                                              <button class="btn" onclick="exportPDF()">Export PDF</button>
+                                                                                <button class="btn btn-secondary" onclick="exportExcel()">Export Excel</button>
+                                                                                </div>
+
+                                                                                <script src="popup.js"></script>
+                                                                                </body>
+                                                                                </html>
