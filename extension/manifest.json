@@ -1,29 +1,28 @@
 {
-      "manifest_version": 3,
-        "name": "GST Copilot",
-          "version": "2.0.0",
-            "description": "GST toolkit for Chartered Accountants - GSTIN validation, HSN lookup, reminders & more.",
-              "permissions": ["activeTab", "scripting", "storage"],
-                "host_permissions": ["https://gstcopilot-backend-1.onrender.com/*", "<all_urls>"],
-                  "action": {
-                      "default_popup": "popup.html",
-                          "default_title": "GST Copilot",
-                              "default_icon": {
-                                    "16": "icons/icon16.png",
-                                          "48": "icons/icon48.png",
-                                                "128": "icons/icon128.png"
-                                                    }
-                                                      },
-                                                        "icons": {
-                                                            "16": "icons/icon16.png",
-                                                                "48": "icons/icon48.png",
-                                                                    "128": "icons/icon128.png"
-                                                                      },
-                                                                        "content_scripts": [
-                                                                            {
-                                                                                  "matches": ["<all_urls>"],
-                                                                                        "js": ["content.js"]
-                                                                                            }
-                                                                                              ]
-                                                                                              }
+  "manifest_version": 3,
+  "name": "GST Copilot",
+  "version": "2.0.0",
+  "description": "GST toolkit for Chartered Accountants - GSTIN validation, HSN lookup, reminders & more.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://gstcopilot-backend-1.onrender.com/*", "<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "GST Copilot",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
 }
