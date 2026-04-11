@@ -149,3 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var rBtn = document.getElementById('reminderBtn');
   if (rBtn) rBtn.addEventListener('click', saveReminder);
 });
+
+document.getElementById('btnReminder').addEventListener('click', generateReminder);
+document.getElementById('btnDueDates').addEventListener('click', loadDueDates);
+document.getElementById('btnExportPDF').addEventListener('click', exportPDF);
+document.getElementById('btnExportExcel').addEventListener('click', exportExcel);
+

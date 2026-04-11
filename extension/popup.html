@@ -68,14 +68,14 @@ select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; 
                                                         <input type="text" id="clientGSTIN" placeholder="Client GSTIN">
                                                           <input type="text" id="amount" placeholder="Amount (₹)">
                                                             <input type="text" id="dueDate" placeholder="Due Date (e.g. 20 Apr 2026)">
-                                                              <button class="btn" onclick="generateReminder()">Generate Reminder</button>
+                                                              <button class="btn" id="btnReminder">Generate Reminder</button>
                                                                 <div class="result" id="reminderResult"></div>
                                                                 </div>
 
                                                                 <!-- DUE DATES TAB -->
                                                                 <div class="content" id="tab-dates" style="display:none">
                                                                   <div class="section-title">GST DUE DATES</div>
-                                                                    <button class="btn" onclick="loadDueDates()">Load Due Dates</button>
+                                                                    <button class="btn" id="btnDueDates">Load Due Dates</button>
                                                                       <div id="dueDatesResult" style="margin-top:12px;"></div>
                                                                       </div>
 
@@ -84,8 +84,8 @@ select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; 
                                                                         <div class="section-title">EXPORT DATA</div>
                                                                           <input type="text" id="exportTitle" placeholder="Report Title">
                                                                             <textarea id="exportContent" placeholder="Report content..." rows="4"></textarea>
-                                                                              <button class="btn" onclick="exportPDF()">Export PDF</button>
-                                                                                <button class="btn btn-secondary" onclick="exportExcel()">Export Excel</button>
+                                                                              <button class="btn" id="btnExportPDF">Export PDF</button>
+                                                                                <button class="btn btn-secondary" id="btnExportExcel">Export Excel</button>
                                                                                 </div>
 
                                                                                 <script src="popup.js"></script>
