@@ -3,7 +3,7 @@
   "name": "GST Copilot",
   "version": "2.0.0",
   "description": "GST toolkit for Chartered Accountants - GSTIN validation, HSN lookup, reminders & more.",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "downloads"],
   "host_permissions": ["https://gstcopilot-backend-1.onrender.com/*", "<all_urls>"],
   "action": {
     "default_popup": "popup.html",
