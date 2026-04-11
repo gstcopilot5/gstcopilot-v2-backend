@@ -140,3 +140,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  var vBtn = document.getElementById('validateBtn');
+  if (vBtn) vBtn.addEventListener('click', validateGSTIN);
+  var hBtn = document.getElementById('hsnBtn');
+  if (hBtn) hBtn.addEventListener('click', lookupHSN);
+  var rBtn = document.getElementById('reminderBtn');
+  if (rBtn) rBtn.addEventListener('click', saveReminder);
+});

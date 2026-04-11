@@ -49,7 +49,7 @@ select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; 
                                   <div class="content" id="tab-gstin">
                                     <div class="section-title">GSTIN VALIDATOR</div>
                                       <input type="text" id="gstinInput" placeholder="Enter 15-digit GSTIN (e.g. 27AAPFU0939F1Z5)" maxlength="15">
-                                        <button class="btn" onclick="validateGSTIN()">Validate GSTIN</button>
+                                        <button class="btn" id="validateBtn">Validate GSTIN</button>
                                           <div class="result" id="gstinResult"></div>
                                           </div>
 
@@ -57,7 +57,7 @@ select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; 
                                           <div class="content" id="tab-hsn" style="display:none">
                                             <div class="section-title">HSN/SAC LOOKUP</div>
                                               <input type="text" id="hsnInput" placeholder="Enter HSN/SAC code (e.g. 8471)">
-                                                <button class="btn" onclick="lookupHSN()">Lookup HSN</button>
+                                                <button class="btn" id="hsnBtn">Lookup HSN</button>
                                                   <div class="result" id="hsnResult"></div>
                                                   </div>
 
