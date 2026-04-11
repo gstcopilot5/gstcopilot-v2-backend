@@ -35,7 +35,7 @@ app.post('/api/validate-gstin', async (req, res) => {
   try {
     const r=/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]/.test(gstin);if(!r)return res.json({success:false,error:"Invalid GSTIN"});res.json({success:true,data:{lgnm:"Verified",sts:"Active",pradr:{stcd:"Maharashtra"}}});
   } catch (err) {
-    res.json({ success: false, error: 'Invalid GSTIN or API error' });
+    res.json({ success: false, error: 'Debug: ' + err.message });
   }
 });
 
