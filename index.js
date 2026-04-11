@@ -150,3 +150,22 @@ app.post('/api/webhook/razorpay', express.raw({type: 'application/json'}), async
   }
   res.json({ status: 'ok' });
 });
+
+// -- Free License --
+app.post('/api/free-license', async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: 'Email required' });
+  const licenseKey = 'FREE-' + require('crypto').randomBytes(6).toString('hex').toUpperCase();
+  licenses[licenseKey] = { plan: 'free', email, createdAt: new Date().toISOString() };
+  try {
+    const { Resend } = require('resend');
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send({
+      from: 'GSTCopilot <gstcopilot@gmail.com>',
+      to: email,
+      subject: 'Your Free GSTCopilot License Key',
+      html: `<h2>Welcome to GSTCopilot!</h2><p>Your free license key: <strong>${licenseKey}</strong></p><p>Download: <a href="https://github.com/gstcopilot5/gstcopilot-v2-backend/raw/main/extension.zip">Click here</a></p>`
+    });
+  } catch(e) { console.error(e); }
+  res.json({ success: true, licenseKey });
+});
