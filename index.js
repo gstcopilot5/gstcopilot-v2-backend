@@ -122,3 +122,31 @@ app.post('/api/export-excel', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`GSTCopilot V2 running on port ${PORT}`));
+// -- Razorpay Webhook --
+const crypto = require('crypto');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+app.post('/api/webhook/razorpay', express.raw({type: 'application/json'}), async (req, res) => {
+  const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+  const signature = req.headers['x-razorpay-signature'];
+  const body = req.body;
+  const expectedSig = crypto.createHmac('sha256', secret).update(body).digest('hex');
+  if (expectedSig !== signature) return res.status(400).json({ error: 'Invalid signature' });
+  const event = JSON.parse(body);
+  if (event.event === 'payment.captured') {
+    const payment = event.payload.payment.entity;
+    const email = payment.email;
+    const amount = payment.amount;
+    const plan = amount >= 99900 ? 'pro' : 'starter';
+    const licenseKey = 'GST-' + crypto.randomBytes(8).toString('hex').toUpperCase();
+    licenses[licenseKey] = { plan, email, createdAt: new Date().toISOString() };
+    await resend.emails.send({
+      from: 'GSTCopilot <gstcopilot@gmail.com>',
+      to: email,
+      subject: 'Your GSTCopilot License Key',
+      html: `<h2>Welcome to GSTCopilot!</h2><p>Your license key: <strong>${licenseKey}</strong></p><p>Plan: ${plan.toUpperCase()}</p><p>Download: <a href="https://github.com/gstcopilot5/gstcopilot-v2-backend/raw/main/extension.zip">Click here</a></p><p>Enter this key in the extension after installing.</p>`
+    });
+  }
+  res.json({ status: 'ok' });
+});
