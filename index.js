@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 require('dotenv').config();
+const { createClient } = require('@supabase/supabase-js');
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 const app = express();
 app.use(cors());
@@ -157,6 +159,7 @@ app.post('/api/free-license', async (req, res) => {
   if (!email) return res.status(400).json({ error: 'Email required' });
   const licenseKey = 'FREE-' + require('crypto').randomBytes(6).toString('hex').toUpperCase();
   licenses[licenseKey] = { plan: 'free', email, createdAt: new Date().toISOString() };
+  await supabase.from('licenses').insert({ license_key: licenseKey, plan: 'free', email });
   try {
     const { Resend } = require('resend');
     const resend = new Resend(process.env.RESEND_API_KEY);
