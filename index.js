@@ -159,7 +159,7 @@ app.post('/api/free-license', async (req, res) => {
   if (!email) return res.status(400).json({ error: 'Email required' });
   const licenseKey = 'FREE-' + require('crypto').randomBytes(6).toString('hex').toUpperCase();
   licenses[licenseKey] = { plan: 'free', email, createdAt: new Date().toISOString() };
-  await supabase.from('licenses').insert({ license_key: licenseKey, plan: 'free', email });
+  const { error: dbError } = await supabase.from('licenses').insert({ license_key: licenseKey, plan: 'free', email }); if (dbError) console.error('SUPABASE ERROR:', dbError);
   try {
     const { Resend } = require('resend');
     const resend = new Resend(process.env.RESEND_API_KEY);
