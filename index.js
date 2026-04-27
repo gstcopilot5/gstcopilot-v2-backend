@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 // ── Verify License ──
-app.post('/api/verify-license', (req, res) => {
+app.post('/api/verify-license', async (req, res) => {
   const { licenseKey } = req.body;
   if (!licenseKey) return res.json({ valid: false });
   const license = licenses[licenseKey];
