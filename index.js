@@ -172,3 +172,12 @@ app.post('/api/free-license', async (req, res) => {
   } catch(e) { console.error(e); }
   res.json({ success: true, licenseKey });
 });
+
+// -- Feedback Endpoint --
+app.post('/api/feedback', async (req, res) => {
+  const { ca_email, type, feature, description, severity } = req.body;
+  if (!ca_email || !type || !description) return res.status(400).json({ error: 'Missing required fields' });
+  const { data, error } = await supabase.from('feedback').insert({ ca_email, type, feature, description, severity }).select();
+  if (error) { console.error('FEEDBACK ERROR:', error); return res.status(500).json({ error: error.message }); }
+  res.json({ success: true, id: data[0].id });
+});
